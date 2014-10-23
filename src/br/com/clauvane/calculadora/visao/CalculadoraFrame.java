@@ -1,7 +1,13 @@
 package br.com.clauvane.calculadora.visao;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -32,16 +38,37 @@ public class CalculadoraFrame extends JFrame{
 	private JButton botaoDePotencia;
 	private JButton botaoDeRadiciacao;
 	private JButton botaoDePonto;
+	private JButton botaoDeMaisOuMenos;
+	private JButton botaoDeDesfazer;
+	private JButton botaoDeApagarTudo;
+	private JButton botaoDeIgual;
+
+	private JLabel painelDeRodape;
 
 	public CalculadoraFrame(String titulo) {
 		super(titulo);
 		init();
+		painelPrincipal.add(BorderLayout.NORTH, visor);
+		painelPrincipal.add(BorderLayout.CENTER, getPainelMeio());
+		this.add(BorderLayout.CENTER, painelPrincipal);
+		this.add(BorderLayout.SOUTH, painelDeRodape);
+		this.setVisible(true);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setSize(450, 200);
 	}
 
 	private void init() {
 		painelPrincipal = new JPanel();
-		visor = new JTextField(8);
-		botaoNumero0 = new JButton("0");
+		visor = new JTextField(22);
+		visor.setHorizontalAlignment(JTextField.RIGHT);
+		visor.setEditable(false);
+		visor.setFont(new Font("Arial Bold", Font.BOLD, 18));
+		visor.setText("123456789");
+		
+		painelDeRodape = new JLabel(" Desenvolvido por Clauvane. Github: clauvane");
+		
 		botaoNumero1 = new JButton("1");
 		botaoNumero2 = new JButton("2");
 		botaoNumero3 = new JButton("3");
@@ -51,6 +78,10 @@ public class CalculadoraFrame extends JFrame{
 		botaoNumero7 = new JButton("7");
 		botaoNumero8 = new JButton("8");
 		botaoNumero9 = new JButton("9");
+		botaoNumero0 = new JButton("0");
+		botaoDeMaisOuMenos = new JButton("+/-");
+		botaoDePonto = new JButton(".");
+
 		botaoDeSoma = new JButton("+");
 		botaoDeSubtracao = new JButton("-");
 		botaoDeMultiplicacao = new JButton("*");
@@ -59,19 +90,56 @@ public class CalculadoraFrame extends JFrame{
 		botaoDePorcentagem = new JButton("%");
 		botaoDePotencia = new JButton("X^");
 		botaoDeRadiciacao = new JButton("Raiz");
-	}
-	
-	public JPanel getPainelTopo(){
+		botaoDeApagarTudo = new JButton("Clear");
+		botaoDeDesfazer = new JButton("<--");
+		botaoDeIgual = new JButton("=");
 		
-		return null;
 	}
 	
 	public JPanel getPainelMeio(){
-		return null;
+		GridLayout grid = new GridLayout(1, 1);
+		JPanel painelMeio = new JPanel(grid);
+		painelMeio.add(getPainelNumeros());
+		painelMeio.add(getPainelOperacoes());
+		
+		return painelMeio;
 	}
 	
-	public JPanel getPainelBaixo(){
-		return null;
+	public JPanel getPainelNumeros(){
+		GridLayout grid = new GridLayout(4, 3);
+		JPanel painelNumeros = new JPanel(grid);
+		painelNumeros.add(botaoNumero1);
+		painelNumeros.add(botaoNumero2);
+		painelNumeros.add(botaoNumero3);
+		painelNumeros.add(botaoNumero4);
+		painelNumeros.add(botaoNumero5);
+		painelNumeros.add(botaoNumero6);
+		painelNumeros.add(botaoNumero7);
+		painelNumeros.add(botaoNumero8);
+		painelNumeros.add(botaoNumero9);
+		painelNumeros.add(botaoDeMaisOuMenos);
+		painelNumeros.add(botaoNumero0);
+		painelNumeros.add(botaoDePonto);
+		
+		return painelNumeros;
+	}
+	
+	public JPanel getPainelOperacoes(){
+		GridLayout grid = new GridLayout(4, 3);
+		JPanel painelOperacoes = new JPanel(grid);
+		painelOperacoes.add(botaoDeSoma);
+		painelOperacoes.add(botaoDeSubtracao);
+		painelOperacoes.add(botaoDeMultiplicacao);
+		painelOperacoes.add(botaoDeDivisao);
+		painelOperacoes.add(botaoDePorcentagem);
+		painelOperacoes.add(botaoDeInverso);
+		painelOperacoes.add(botaoDeIgual);
+		painelOperacoes.add(botaoDePotencia);
+		painelOperacoes.add(botaoDeRadiciacao);
+		painelOperacoes.add(botaoDeDesfazer);
+		painelOperacoes.add(botaoDeApagarTudo);
+		
+		return painelOperacoes;
 	}
 	
 }
