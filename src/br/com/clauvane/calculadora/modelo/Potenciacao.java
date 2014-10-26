@@ -1,9 +1,11 @@
 package br.com.clauvane.calculadora.modelo;
 
+import java.math.BigDecimal;
+
 public class Potenciacao extends OperacaoStub{
 
-	public double calcular(double primeiroNumero, double segundoNumero) {
-		return Math.pow(primeiroNumero, segundoNumero);
+	public BigDecimal calcular(BigDecimal primeiroNumero, BigDecimal segundoNumero) {
+		return new BigDecimal(Math.pow(primeiroNumero.doubleValue(), segundoNumero.doubleValue())).setScale(2, BigDecimal.ROUND_UP);
 	}
 	
 }
